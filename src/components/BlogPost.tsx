@@ -1,10 +1,10 @@
-import React from 'react';
+// import React from 'react';
 
-const BlogPost = ({ title, excerpt, category, readTime, author, date, image, authorImage }) => {
+const BlogPost = ({ title, excerpt, category, readTime, author, createdAt, coverImage, authorImage }) => {
   return (
     <article className="bg-white rounded-xl overflow-hidden shadow-md">
       <img 
-        src={image}
+        src={coverImage}
         alt={title}
         className="w-full h-48 object-cover"
       />
@@ -23,7 +23,13 @@ const BlogPost = ({ title, excerpt, category, readTime, author, date, image, aut
           />
           <div>
             <p className="text-sm font-medium text-gray-900">{author}</p>
-            <p className="text-sm text-gray-500">{date}</p>
+            <p className="text-sm text-gray-500">
+              {new Date(createdAt).toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+              })}
+            </p>
           </div>
         </div>
       </div>

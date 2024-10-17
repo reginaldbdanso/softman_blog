@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState, useEffect } from 'react';
 import BlogPost from './BlogPost';
 import FeaturedPost from './FeaturedPost';
 import SearchBar from './SearchBar';
@@ -7,22 +7,22 @@ const POSTS_PER_PAGE = 9;
 
 const BlogGrid = () => {
   const [visiblePosts, setVisiblePosts] = useState(POSTS_PER_PAGE);
+  const [blogPosts, setBlogPosts] = useState([]);
 
-  // Mock data for blog posts
-  const blogPosts = [
-    {
-      id: 1,
-      title: "The Future of Web Development: Trends to Watch in 2024",
-      excerpt: "Explore the cutting-edge technologies and methodologies shaping the future of web development. From AI-driven design to WebAssembly, discover what's next in the world of web tech.",
-      category: "Technology",
-      readTime: "5 min read",
-      author: "John Doe",
-      date: "May 15, 2024",
-      image: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2340&q=80",
-      authorImage: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-    },
-    // Add more mock blog posts here...
-  ];
+  useEffect(() => {
+    const fetchBlogPosts = async () => {
+      try {
+        const response = await fetch(import.meta.env.VITE_POSTS_API_URL);
+        const data = await response.json();
+        console.log(data);
+        setBlogPosts(data);
+      } catch (error) {
+        console.error('Error fetching blog posts:', error);
+      }
+    };
+
+    fetchBlogPosts();
+  }, []);
 
   const loadMore = () => {
     setVisiblePosts(prevVisible => Math.min(prevVisible + POSTS_PER_PAGE, blogPosts.length));
