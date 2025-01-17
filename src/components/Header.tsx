@@ -1,20 +1,25 @@
 import React from 'react';
-import { Menu } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { PenTool } from 'lucide-react';
 
-const Header = () => {
+const Header: React.FC = () => {
   return (
-    <header className="bg-white py-6">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
-        <h1 className="text-2xl font-bold text-gray-900">Logo</h1>
-        <nav className="hidden md:flex space-x-8">
-          <a href="#" className="text-base font-medium text-gray-500 hover:text-gray-900">Home</a>
-          <a href="#" className="text-base font-medium text-gray-900">Blog</a>
-          <a href="#" className="text-base font-medium text-gray-500 hover:text-gray-900">About</a>
-          <a href="#" className="text-base font-medium text-gray-500 hover:text-gray-900">Contact</a>
+    <header className="bg-blue-600 text-white shadow-md">
+      <div className="container mx-auto px-4 py-4 flex justify-between items-center">
+        <Link to="/" className="flex items-center space-x-2">
+          <PenTool size={24} />
+          <span className="text-xl font-bold">Blogpost CMS</span>
+        </Link>
+        <nav>
+          <ul className="flex space-x-4">
+            <li>
+              <Link to="/" className="hover:text-blue-200">Home</Link>
+            </li>
+            <li>
+              <Link to="/create" className="hover:text-blue-200">Create Post</Link>
+            </li>
+          </ul>
         </nav>
-        <button className="md:hidden text-gray-500 hover:text-gray-900">
-          <Menu size={24} />
-        </button>
       </div>
     </header>
   );
