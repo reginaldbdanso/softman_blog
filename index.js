@@ -28,6 +28,12 @@ app.use('/api/posts', postRoutes);
 // app.use('/api/blogs', blogRoutes);
 app.use('/api/user', userRoutes);
 
+//production build
+app.use(express.static(path.join(__dirname, '../frontend/dist')));
+app.get('/',(req,res)=>{
+    res.sendFile(path.join(__dirname, '../frontend/dist', 'index.html'));
+})
+
 mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
