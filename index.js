@@ -34,6 +34,12 @@ app.get('/',(req,res)=>{
     res.sendFile(path.join(__dirname, '../frontend/dist', 'index.html'));
 })
 
+// admin panel production build
+app.use(express.static(path.join(__dirname, '../admin/dist')));
+app.get('/admin',(req,res)=>{
+    res.sendFile(path.join(__dirname, '../admin/dist', 'index.html'));
+})
+
 mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
